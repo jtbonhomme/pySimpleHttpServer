@@ -19,13 +19,14 @@ class requestHandler(BaseHTTPRequestHandler):
         else:
             filename = "." + self.path
 
-        print("open file : " + filename)
         try:
+            print("open file : " + filename)
             with open(filename, 'r', encoding='utf8') as File:
                 content = File.read()
         
             self._set_headers()
             self.wfile.write(content.encode("utf8")) # NOTE: must return a bytes object!
+
         except:
             self.send_response(404)
             self.send_header("Content-type", "text/html")
